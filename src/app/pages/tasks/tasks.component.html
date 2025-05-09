@@ -1,0 +1,14 @@
+
+<section class="text-white font-poppins">
+    <h1 class="text-2xl text-gray-800 font-semibold mb-4">Mis Pendientes</h1>
+
+    <button
+        class="mb-4 bg-[#62905F] text-white px-4 py-2 rounded-md hover:bg-[#50734c] transition-colors duration-200 font-semibold shadow-md cursor-pointer">Agregar
+        Tárea
+    </button>
+
+    <div *ngFor="let task of tasks">
+        <app-task-card [task]="task">
+        </app-task-card>
+    </div> 
+</section>

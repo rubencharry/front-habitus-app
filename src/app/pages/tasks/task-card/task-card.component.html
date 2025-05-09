@@ -1,0 +1,19 @@
+<div
+  class="bg-white/65 text-primary rounded-xl shadow-lg p-4 mb-4 transition-transform duration-200 hover:scale-[1.01] hover:shadow-xl">
+
+  <ng-container>
+    <h2 class="text-lg text-[#62905F] font-bold">{{ task.name }}</h2>
+    <p class="text-sm text-gray-800">Fecha aproximada - {{ task.date }}</p>
+    <div class="m-1">
+      <button 
+        class="text-gray-600 hover:text-blue-600 transition-colors text-sm font-medium cursor-pointer mr-2">
+        ✏️ Editar
+      </button>
+      <button
+        class="text-gray-600 hover:text-red-600 transition-colors text-sm font-medium cursor-pointer mr-2">
+        🗑️ Eliminar
+      </button>
+    </div>
+  </ng-container>
+
+</div>

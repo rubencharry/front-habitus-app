@@ -1,0 +1,35 @@
+<!-- habit-card.component.html -->
+<div
+  class="bg-white/65 text-primary rounded-xl shadow-lg p-4 mb-4 transition-transform duration-200 hover:scale-[1.01] hover:shadow-xl">
+
+  <ng-container *ngIf="!editando;">
+    <h2 class="text-lg text-[#62905F] font-bold">{{ habit.name }}</h2>
+    <p class="text-sm text-gray-800">Frecuencia: {{ habit.frequency }}</p>
+    <div class="m-1">
+      <button (click)="iniciarEdicion()"
+        class="text-gray-600 hover:text-blue-600 transition-colors text-sm font-medium cursor-pointer mr-2">
+        ✏️ Editar
+      </button>
+      <button (click)="eliminarHabito()"
+        class="text-gray-600 hover:text-red-600 transition-colors text-sm font-medium cursor-pointer mr-2">
+        🗑️ Eliminar
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="editando;">
+    <form (ngSubmit)="guardarEdicion()" #formHabito="ngForm" class="mb-6 space-y-2">
+      <input  [(ngModel)]="editado.name" name="name" required placeholder="Nombre del hábito"
+        class="text-gray-600 p-2 rounded w-full border border-gray-300 mb-2" />
+      <input [(ngModel)]="editado.frequency" name="frequency" required placeholder="Frecuencia"
+        class="text-gray-600 p-2 rounded w-full border border-gray-300 mb-2" />
+      <div class="flex gap-2">
+        <button (click)="guardarEdicion()" type="submit"
+          class="text-green-600 hover:underline text-sm">✅ Guardar</button>
+        <button (click)="cancelar()"
+          class="text-gray-500 hover:underline text-sm">❌ Cancelar</button>
+      </div>
+    </form>
+  </ng-container>
+
+</div>

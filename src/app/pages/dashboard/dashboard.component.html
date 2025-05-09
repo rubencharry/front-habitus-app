@@ -1,0 +1,58 @@
+<h1 class="text-3xl text-center text-gray-800 font-semibold mb-8">Bienvenido a Habitus!</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 font-poppins">
+
+    <!-- Sección de Hábitos -->
+    <section class="bg-white rounded-xl shadow-lg p-6">
+        <h2 class="text-2xl text-gray-800 font-semibold mb-4 flex items-center">
+            🧘‍♂️ <span class="ml-2">Hábitos del día</span>
+        </h2>
+
+        <ul class="space-y-3">
+            <li *ngFor="let habit of habits" class="flex items-center">
+                <input type="checkbox" [(ngModel)]="habit.completed" (ngModelChange)="guardarEstado(habit)"
+                    class="mr-3 w-5 h-5 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500">
+                <span [class.line-through]="habit.completed"
+                      class="text-gray-800 text-lg transition-all duration-150">
+                    {{ habit.name }}
+                </span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Sección de Tareas -->
+    <section class="bg-white rounded-xl shadow-lg p-6">
+        <h2 class="text-2xl text-gray-800 font-semibold mb-4 flex items-center">
+            📋 <span class="ml-2">Tareas Pendientes</span>
+        </h2>
+
+        <ul class="space-y-3">
+            <li *ngFor="let tarea of tareas" class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input type="checkbox" [(ngModel)]="tarea.completed" (ngModelChange)="guardarEstadoTarea(tarea)"
+                        class="mr-3 w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+                    <span [class.line-through]="tarea.completed"
+                          class="text-gray-800 text-lg transition-all duration-150">
+                        {{ tarea.name }}
+                    </span>
+                </div>
+                <div class="text-sm italic ml-4"
+                    [ngClass]="obtenerClaseTiempoRestante(tarea.limit)">
+                {{ calcularTiempoRestante(tarea.limit) }}
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>
+
+<!-- Toast de Hábito -->
+<div *ngIf="showToast"
+    class="fixed bottom-6 right-6 bg-green-500 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-300 z-50">
+    ✅ ¡Hábito completado!
+</div>
+
+<!-- Toast de Tarea -->
+<div *ngIf="showTaskToast"
+    class="fixed bottom-6 right-6 bg-blue-500 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-300 z-50">
+    📌 ¡Tarea completada!
+</div>
