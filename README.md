@@ -31,6 +31,12 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
 ## Servidor de desarrollo
 
+Antes de correr el proyecto debes ejecutar el comando 
+
+```bash
+npm install
+```
+
 Para iniciar un servidor local de desarrollo, ejecuta:
 
 ```bash
