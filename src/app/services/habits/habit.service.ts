@@ -9,14 +9,13 @@ export interface Habit {
   title: string;
   description: string;
   frequency: string;
-  createdAt: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class CursoService {
-  private apiUrl = `${environment.url}/api`; // Cambia por la URL de tu backend
+export class HabitService {
+  private apiUrl = `${environment.url}`;
 
   constructor(private http: HttpClient) {}
 

@@ -12,12 +12,12 @@ import { ChangeDetectorRef } from '@angular/core';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HabitCardComponent {
-  @Input() habit!: { id: number; name: string; frequency: string };
+  @Input() habit!: { id: number; title: string; description: string; frequency: string };
   @Output() editar = new EventEmitter<any>();
   @Output() eliminar = new EventEmitter<number>();
 
   editando = false;
-  editado = { name: '', frequency: '' };
+  editado = { title: '', frequency: '', description: '' };
 
   iniciarEdicion() {
     this.editando = true;

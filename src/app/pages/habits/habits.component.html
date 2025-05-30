@@ -24,19 +24,19 @@
         <h2 class="text-xl font-semibold mb-4">Crear nuevo hábito</h2>
         <p class="text-gray-600 mb-4">Agrega un nuevo hábito a tu lista.</p>
         <form (ngSubmit)="crearHabito()" #formHabito="ngForm" class="mb-6 space-y-2">
-            <input [(ngModel)]="newHabit.name" name="name" required placeholder="Nombre del hábito"
+            <input [(ngModel)]="newHabit.title" name="title" required placeholder="Nombre del hábito"
+                class="p-2 rounded w-full border border-gray-300" />
+            <input [(ngModel)]="newHabit.description" name="description" placeholder="Descripción"
                 class="p-2 rounded w-full border border-gray-300" />
             <input [(ngModel)]="newHabit.frequency" name="frequency" required placeholder="Frecuencia"
                 class="p-2 rounded w-full border border-gray-300" />
             <div class="flex space-x-2">
-                <button 
-                type="submit" 
-                class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-600 cursor-pointer">
+                <button type="submit"
+                    class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-600 cursor-pointer">
                     Crear Hábito
                 </button>
-                <button 
-                (click)="mostrarModal=false" 
-                class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer">
+                <button (click)="mostrarModal=false"
+                    class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600 cursor-pointer">
                     Cancelar
                 </button>
             </div>

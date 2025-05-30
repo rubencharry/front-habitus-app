@@ -1,46 +1,57 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HabitCardComponent } from './habit-card/habit-card.component';
+import { HabitService, Habit } from '../../services/habits/habit.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-habits',
-  imports: [HabitCardComponent, CommonModule, FormsModule],
+  imports: [HabitCardComponent, CommonModule, FormsModule, HttpClientModule],
   templateUrl: './habits.component.html',
   styleUrl: './habits.component.css'
 })
-export class HabitsComponent {
+export class HabitsComponent implements OnInit {
   mostrarModal = false;
-  newHabit = { id: 3 ,name: '', frequency: '' };
-  habits = [
-    { id: 1, name: 'Leer 30 minutos', frequency: 'Diario' },
-    { id: 2, name: 'Ejercicio', frequency: '3 veces a la semana' },
-    { id: 3, name: 'Meditar', frequency: 'Diario' },
-    { id: 4, name: 'Beber 2 litros de agua', frequency: 'Diario' },
-    { id: 5, name: 'Escribir en el diario', frequency: 'Cada semana' }
-  ];
+  newHabit = { id: 0, title: '', description: '', frequency: '' };
+  habits: Habit[] = [];
 
-  crearHabito() {
-    const nuevo = {
-      ...this.newHabit
-    };
-    this.habits.push(nuevo);
-    console.log('Nuevo hábito creado:', nuevo);
-    this.newHabit = { id: 0, name: '', frequency: '' };
-    this.mostrarModal = false;
+  constructor(private habitService: HabitService) { }
+
+  ngOnInit() {
+    this.loadHabits();
   }
 
-  addHabit() {
-    console.log('Agregar hábito...');
+  loadHabits(): void {
+    this.habitService.getHabits().subscribe({
+      next: (data) => this.habits = data,
+      error: (err) => console.error('Error cargando hábitos', err)
+    });
+  }
+
+  crearHabito() {
+    this.habitService.createHabit(this.newHabit).subscribe({
+      next: (nuevoHabito) => {
+        this.habits.push(nuevoHabito);
+        console.log('Hábito creado exitosamente:', nuevoHabito);
+        this.loadHabits();
+        this.newHabit = {id: 0, title: '', description: '', frequency: '' };
+        this.mostrarModal = false;
+      },
+      error: (err) => {
+        console.error('Error al crear hábito:', err);
+      }
+    });
   }
 
   editarHabito(habitEditado: any) {
-    console.log('Editar hábito...', habitEditado);
-    const index = this.habits.findIndex(h => h.id === habitEditado.id);
-    if (index !== -1) this.habits[index] = habitEditado;
+    // console.log('Editar hábito...', habitEditado);
+    // const index = this.habits.findIndex(h => h.id === habitEditado.id);
+    // if (index !== -1) this.habits[index] = habitEditado;
   }
-  
+
   eliminarHabito(id: number) {
-    this.habits = this.habits.filter(h => h.id !== id);
+    // this.habits = this.habits.filter(h => h.id !== id);
   }
 }

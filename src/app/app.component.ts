@@ -5,10 +5,11 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-   providers: [provideCharts(withDefaultRegisterables())],
+  standalone: true,
   imports: [RouterOutlet, NavbarComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
+  providers: [provideCharts(withDefaultRegisterables())], 
 })
 export class AppComponent {
   title = 'organization-app';
